@@ -1,0 +1,59 @@
+CREATE TABLE electronics
+(
+    id            SERIAL PRIMARY KEY,
+    product_name  VARCHAR(30) NOT NULL,
+    company_name  VARCHAR(20) NOT NULL,
+    product_count INT DEFAULT 0,
+    price         NUMERIC     NOT NULL,
+    is_discounted BOOLEAN
+);
+INSERT INTO electronics(product_name, company_name, product_count, price, is_discounted)
+VALUES ('iPhone X', 'Apple', 3, 76000, false),
+       ('iPhone 8', 'Apple', 2, 71000, true),
+       ('iPhone 7', 'Apple', 5, 42000, true),
+       ('Galaxy S9', 'SAMSUNG', 2, 46000, false),
+       ('Galaxy S8 Plus', 'SAMSUNG', 1, 56000, true),
+       ('Desire 12', 'HTC', 5, 28000, true),
+       ('NOKIA 9', 'HMD Global', 6, 38000, true);
+DROP TABLE electronics;
+SELECT *
+FROM electronics
+WHERE company_name NOT LIKE 'HTC%';
+
+SELECT *
+FROM electronics
+WHERE company_name = 'Apple'
+  AND price < 75000;
+
+SELECT *
+FROM electronics
+WHERE price >= 46000;
+
+SELECT *
+FROM electronics
+ORDER BY price DESC
+LIMIT 2;
+
+SELECT product_name
+FROM electronics
+ORDER BY price ASC
+LIMIT 1;
+
+SELECT *
+FROM electronics
+WHERE is_discounted IN ('true');
+
+SELECT *
+FROM electronics
+WHERE is_discounted NOT IN ('true');
+
+SELECT price
+FROM electronics
+ORDER BY price DESC;
+
+SELECT sum(price)
+FROM electronics;
+
+SELECT company_name
+FROM electronics
+WHERE product_count <= 2;
